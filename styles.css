@@ -1,0 +1,30 @@
+body 
+{
+    background: linear-gradient(to bottom, #67b9c6, #d6e6f4);
+    background-attachment: fixed;
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+}
+
+.instructions
+{
+    font-size: 1.3em;
+}
+
+.container 
+{
+    padding: 20px;
+}
+
+button 
+{
+    background-color: #ffffff;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 1em;
+    padding: 10px 20px;
+    border: 0.7;
+    border-radius: 50px;
+    margin-top: 20px;
+    animation: flash 1s infinite;
+}
