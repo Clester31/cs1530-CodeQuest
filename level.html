@@ -7,6 +7,51 @@
     <title>Level</title>
 </head>
 <body>
-    <div class="levelContainer"></div>
+    <div id="levelContainer"></div>
+    <div class="buttons">
+        <button id="testCodeBtn">Test Code</button>
+        <button onclick="window.location.href='levelMap.html'">exit</button>
+    </div>
+    <script>
+        const levelContainer = document.getElementById('levelContainer');
+        const testCodeBtn = document.getElementById('testCodeBtn')
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const levelName = urlParams.get('levelName');
+        const levelNum = urlParams.get('levelNum');
+        const levelCode = urlParams.get('levelCode');
+        const levelSolution = urlParams.get('levelSolution');
+
+        const levelTitle = document.createElement('h1');
+        levelTitle.textContent = levelName;
+        levelContainer.appendChild(levelTitle);
+
+        const levelCodeEnv = document.createElement('textarea');
+        levelCodeEnv.value = levelCode;
+        levelCodeEnv.rows = 20;
+        levelCodeEnv.cols = 40
+        levelContainer.appendChild(levelCodeEnv);
+
+        const testResult = document.createElement('h1');
+        testResult.style.display = 'hidden';
+        testResult.textContent = 'test';
+        levelContainer.appendChild(testResult)
+
+        if(testCodeBtn) {
+            testCodeBtn.addEventListener("click", () => {
+                if(levelCodeEnv.value === levelSolution) {
+                    testResult.style.display = 'block';
+                    testResult.style.color = 'green';
+                    testResult.textContent = 'Test Passed!'
+                } else {
+                    testResult.style.display = 'block';
+                    testResult.style.color = 'red';
+                    testResult.textContent = 'Test failed!'
+                }
+            })
+        }
+
+    </script>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -20,3 +20,7 @@ document.getElementById('logoutButton').addEventListener('click', () => {
     // Redirect to the sign-up page
     window.location.href = 'home.html';
 });
+//back to home page functionality 
+document.getElementById('homeButton').addEventListener('click', () => {
+    window.location.href = 'home.html';
+});

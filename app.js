@@ -12,15 +12,15 @@ function loadProfile(data) {
     }
 
     login() {
-
+        //WIP
     }
 
     logOut() {
-
+        //WIP
     }
 
     createAccount() {
-
+        //WIP
     }
 }
 
@@ -34,19 +34,19 @@ class Educator extends User {
     }
 
     editLevel() {
-
+        // WIP
     }
 
-    createLevel() {
-
+    createLevel(levelCode, levelNumber, levelUnlocked, levelCodeSolution, challengeDescription) {
+        levels.push(new Level(levelCode, levelNumber, levelUnlocked, levelCodeSolution, challengeDescription));
     }
 
     editCirriculum() {
-
+        // WIP
     }
 
     editLearningObjectives() {
-
+        // WIP
     }
 }
 
@@ -74,25 +74,17 @@ class LevelMap {
 
     selectLevel(level) {
         const ce = new CodingEnvironment(level, "javascript", level.levelCode);
-        window.location.href = `level.html?levelNum=${encodeURIComponent(level.levelNumber)}&levelName=${encodeURIComponent(level.levleName)}&levelCode=${encodeURIComponent(level.levelCode)}&levelSolution=${encodeURIComponent(level.levelCodeSolution)}`
-
-        // const levelName = document.createElement('h1');
-        // const codingBox = document.createElement('textarea');
-        // const testBtn = document.createElement('button');
-
-        // levelName.textContent = level.levelName;
-        // testBtn.textContent = "Test Code";
-
-        // const levelContainerDiv = document.getElementById('levelContainer');
-        // levelContainerDiv.appendChild(levelName);
+        window.location.href = `level.html?levelNum=${encodeURIComponent(ce.level.levelNumber)}&levelName=${encodeURIComponent(ce.level.challengeDescription)}&levelCode=${encodeURIComponent(ce.level.levelCode)}&levelSolution=${encodeURIComponent(ce.level.levelCodeSolution)}`
     }
 
     resetProgress() {
-
+        for(let i = 0; i < levels.length; i++) {
+            levels[i].levelUnlocked = false;
+        }
     }
 
     unlockLevel() {
-
+        // WIP
     }
 
     openMap(levelMapDiv) {
@@ -215,22 +207,17 @@ class Item {
 const test_user = new Student("John", "Smith", "johnsmith@gmail.com", "1 January 2000", "JohnSmith123", "Beginner", 100, []);
 
 const levelCodeSolutions = [
+    `function helloWorld() { \nconsole.log("hello world");\n}`,
+    `function variableTest() {
+    var x = 10;
+    console.log(x);
+}
     `
-        function helloWorld() {
-            console.log("Hello World");
-        }
-        `,
-    `
-        function variableTest() {
-            var x = 10;
-            console.log(x);
-        }
-        `
 ]
 
 const levels = [
-    new Level(`function helloWorld() { \n\n}`, 0, true, levelCodeSolutions[0], "learn how to print to the console"),
-    new Level(`function variableTest() { \n\n}`, 1, false, levelCodeSolutions[1], "learn how to create and print variables")
+    new Level(`function helloWorld() { \n\n}`, 0, true, levelCodeSolutions[0], "Print Statements"),
+    new Level(`function variableTest() { \n\n}`, 1, false, levelCodeSolutions[1], "Variables")
 ]
 
 const levelMap = new LevelMap(levels, [], levels[0], levels.slice(1));
@@ -252,6 +239,7 @@ const purchaseItemBtn = document.getElementById("purchaseItemBtn");
 const submitButton = document.getElementById('submitButton');
 const levelMapBtn = document.getElementById("levelMapBtn");
 const showLvlBtn = document.getElementById("showLvlBtn");
+const testCodeBtn = document.getElementById("testCodeBtn");
 
 function Main() {
     // open up the shop
