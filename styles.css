@@ -27,3 +27,39 @@ button
     border-radius: 50px;
     margin-top: 20px;
 }
+.shop {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 20px; 
+    padding: 20px;
+    border-radius: 10px; 
+}
+
+.shop-item {
+    text-align: center; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.shop-item img {
+    width: 150px; 
+    height: auto; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.shop-item img:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+}
+.shop-item .item-id {
+    font-size: 16px; 
+    font-weight: bold; 
+    color: black; 
+    margin-top: 10px; 
+}
+
