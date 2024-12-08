@@ -1,4 +1,25 @@
-class User {
+document.getElementById('submitButton').addEventListener('click', () => {
+    const form = document.getElementById('signUpForm');
+    let formData = {};
+
+    // Collect form data into an object
+    new FormData(form).forEach((value, key) => {
+        formData[key] = value;
+    });
+
+    // Store form data in localStorage
+    localStorage.setItem('profileData', JSON.stringify(formData));
+
+    // Redirect to the profile page
+    window.location.href = 'profile.html';
+});
+
+function loadProfile(data) {
+    // Display the submitted data in the profile section
+    document.getElementById('profile-name').textContent = data.name || 'N/A';
+    document.getElementById('profile-email').textContent = data.email || 'N/A';
+    document.getElementById('profile-username').textContent = data.username || 'N/A';
+}class User {
     constructor(firstName, lastName, email, birthday) {
         this.firstName = firstName;
         this.lastName = lastName;
