@@ -8,16 +8,18 @@
 </head>
 <body>
     <h1>CodeQuest Profile</h1>
-    <div class = "profile">
+    <div class="profile">
         <img src="Profile.png" alt="Profile Picture" style="border-radius: 50%;" width="150px" height="150px">
-       <br><br><br>
-        <h3>Name:</h2>
-        <h3>Email:</h3>
-        <h3>Username:</h3>
-        <h3>Birthday:</h3>
-        <h3>Bio:</h3>
+        <br><br><br>
+        
+        <h3>Name: <span id="profile-name">Loading...</span></h3>
+        <h3>Email: <span id="profile-email">Loading...</span></h3>
+        <h3>Username: <span id="profile-username">Loading...</span></h3>
     </div>
+
     <br><br><br><br>
-      <button>Log Out</button>
+    <button id="logoutButton">Log Out</button>
+
+    <script src="profile.js"></script>
 </body>
 </html>
