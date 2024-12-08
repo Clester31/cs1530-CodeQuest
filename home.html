@@ -11,25 +11,18 @@
         <br> <br> <br> <br> <br> <br> <br> <br>
         <h1>CodeQuest Game</h1>
 
-        <button onclick="openShop()">SHOP</button>
+        <button id="shopBtn">SHOP</button>
         <button onclick="openProfile()">PROFILE</button>
-        <button onclick="startGame()">LEVEL MAP</button>
+        <button id="levelMapBtn" type="button">LEVEL MAP</button>
         <br><br><br><br><br><br><br><br><br><br>
         <button onclick="newUser()">New User? Sign Up Here!</button>
     </div>
 
+    <script src="app.js"></script>
     <script>
-        function openShop() 
-        {
-           window.location.href = "index.html";
-        }
         function openProfile() 
         {
            window.location.href = "profile.html";
-        }
-        function startGame() 
-        {
-           window.location.href = "levelMap.html";
         }
         function newUser() 
         {
