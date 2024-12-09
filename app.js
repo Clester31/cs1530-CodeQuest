@@ -195,12 +195,15 @@ class Shop {
 
     purchaseItem(itemId, user) {
         const item = this.itemsForSale.find(item => item.id == itemId); //search for the item we want based off its id
-        if (item && item.inStock) { // if it exists and is in stock then purchase it
-            alert("Purchased: ", item.name);
+        if (item && item.inStock && user.coins >= item.price) { // if it exists and is in stock then purchase it
+            user.coins -= item.price
+            alert("Purchased item! You have " + user.coins + " coins remaining.");
             user.inventory.push(item); // add to user inventory
             item.inStock = false; // set it as out of stock
+        } else if (item.inStock && test_user.coins < item.price) {
+            alert("You don't have enough coins to purchase this item.");
         } else {
-            alert("Item not available for purchase.");
+            alert("Item is out of stock")
         }
     }
 }
@@ -217,7 +220,7 @@ class Item {
 }
 
 // test user
-const test_user = new Student("John", "Smith", "johnsmith@gmail.com", "1 January 2000", "JohnSmith123", "Beginner", 100, []);
+const test_user = new Student("John", "Smith", "johnsmith@gmail.com", "1 January 2000", "JohnSmith123", "Beginner", 30, []);
 
 // solutions for the levels
 const levelCodeSolutions = [
