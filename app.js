@@ -37,6 +37,7 @@ class Educator extends User {
         // WIP
     }
 
+    // pushes new level to the level array
     createLevel(levelCode, levelNumber, levelUnlocked, levelCodeSolution, challengeDescription) {
         levels.push(new Level(levelCode, levelNumber, levelUnlocked, levelCodeSolution, challengeDescription));
     }
@@ -50,6 +51,7 @@ class Educator extends User {
     }
 }
 
+// subclass of User
 class Student extends User {
     constructor(firstName, lastName, email, birthday, userName, skillLevel, coins, inventory) {
         super(firstName, lastName, email, birthday);
@@ -59,8 +61,8 @@ class Student extends User {
         this.inventory = inventory;
     }
 
-    setSkillLevel() {
-
+    setSkillLevel(newSkillLevel) {
+        this.skillLevel = newSkillLevel;
     }
 }
 
@@ -72,11 +74,13 @@ class LevelMap {
         this.levelsLocked = levelsLocked;
     }
 
+    // create a new coding environemnt and switch pages. Pass in some parameters in the URL string to be used to set up the level
     selectLevel(level) {
         const ce = new CodingEnvironment(level, "javascript", level.levelCode);
         window.location.href = `level.html?levelNum=${encodeURIComponent(ce.level.levelNumber)}&levelName=${encodeURIComponent(ce.level.challengeDescription)}&levelCode=${encodeURIComponent(ce.level.levelCode)}&levelSolution=${encodeURIComponent(ce.level.levelCodeSolution)}`
     }
 
+    // locks every level except for the first one
     resetProgress() {
         for(let i = 0; i < levels.length; i++) {
             levels[i].levelUnlocked = false;
@@ -87,19 +91,24 @@ class LevelMap {
         // WIP
     }
 
+    // opens the map. Displays all the levels and marks levels as unlocked if levelUnlocked is set to false
     openMap(levelMapDiv) {
         levelMapDiv.innerHTML = "";
+        // loop through each level in the level array
         this.levels.forEach((level) => {
+            // each level has a button to access the levle page
             const levelBtn = document.createElement("button");
             levelBtn.textContent = level.challengeDescription;
 
+            // change style of locked level
             if(!level.levelUnlocked) {
                 levelBtn.style.backgroundColor = '#ffbbbb'
                 levelBtn.disabled = true;
             }
     
+            // select the level and change page
             levelBtn.addEventListener("click", () => {
-                console.log(`Selected level: ${level.levelNumber}`);
+                //console.log(`Selected level: ${level.levelNumber}`);
                 this.selectLevel(level);
             });
     
@@ -149,6 +158,7 @@ class CodingEnvironment {
         console.log("Compiling...")
     }
 
+    // checks to make sure user code == correct code 
     testCode() {
         if (this.currentCode === this.level.levelCodeSolution) {
             console.log("test passed");
@@ -157,8 +167,9 @@ class CodingEnvironment {
         }
     }
 
+    // simply changes window
     submitCode() {
-        window.location.href = 'home.html'
+        window.location.href = 'index.html'
     }
 }
 
@@ -167,8 +178,9 @@ class Shop {
         this.itemsForSale = itemsForSale;
     }
 
+    // change window back to home
     exitShop() {
-        window.location.href = 'home.html'
+        window.location.href = 'index.html'
     }
 
     openShop() {
@@ -204,8 +216,10 @@ class Item {
     }
 }
 
+// test user
 const test_user = new Student("John", "Smith", "johnsmith@gmail.com", "1 January 2000", "JohnSmith123", "Beginner", 100, []);
 
+// solutions for the levels
 const levelCodeSolutions = [
     `function helloWorld() { \nconsole.log("hello world");\n}`,
     `function variableTest() {
@@ -215,24 +229,28 @@ const levelCodeSolutions = [
     `
 ]
 
+// test levels
 const levels = [
     new Level(`function helloWorld() { \n\n}`, 0, true, levelCodeSolutions[0], "Print Statements"),
     new Level(`function variableTest() { \n\n}`, 1, false, levelCodeSolutions[1], "Variables")
 ]
 
+// test level map
 const levelMap = new LevelMap(levels, [], levels[0], levels.slice(1));
 
-// I just had these auto-generated because im too lazy to come up with item ideas. Will change later
+// test items
 const shop_items = [
-    new Item(1, "Sword", "A basic sword for beginners", 10, "Weapon", true),
-    new Item(2, "Shield", "A basic shield for defense", 15, "Armor", false),
-    new Item(3, "Potion", "A health-restoring potion", 5, "Consumable", true),
-    new Item(4, "Leather Boots", "Basic footwear for protection", 20, "Armor", true),
-    new Item(5, "Map", "A map to help navigate the world", 10, "Tool", false)
+    new Item(1, "Sword", "An iron sword", 10, "Weapon", true),
+    new Item(2, "Shield", "A Sturdy Shield", 15, "Armor", false),
+    new Item(3, "Potion", "Restores Health", 5, "Consumable", true),
+    new Item(4, "Leather Boots", "Makes you run faster", 20, "Armor", true),
+    new Item(5, "Map", "Allows you to unlock any level you choose", 10, "Tool", false)
 ];
 
+// test shop
 const shop = new Shop(shop_items);
 
+// get buttons
 const shopButton = document.getElementById("shopBtn");
 const itemIdField = document.getElementById("itemIdField");
 const purchaseItemBtn = document.getElementById("purchaseItemBtn");
@@ -241,22 +259,24 @@ const levelMapBtn = document.getElementById("levelMapBtn");
 const showLvlBtn = document.getElementById("showLvlBtn");
 const testCodeBtn = document.getElementById("testCodeBtn");
 
+// main function
 function Main() {
     // open up the shop
     // prints the list of items in the shop
-    // should display each item eventually\
     if (shopButton) {
         shopButton.addEventListener("click", () => {
             shop.openShop();
         });
     }
 
+    // opens up the level map
     if (showLvlBtn) {
         showLvlBtn.addEventListener("click", () => {
             const levelMapDiv = document.getElementById("levelMapDiv"); 
             levelMap.openMap(levelMapDiv);
         });
     }
+
     //purchasing an item.
     if (purchaseItemBtn) {
         purchaseItemBtn.addEventListener("click", () => {
@@ -265,6 +285,7 @@ function Main() {
         });
     }
 
+    // acesses the level map
     if (levelMapBtn) {
         levelMapBtn.addEventListener("click", () => {
             //window.location.href = 'levelMap.html'
@@ -272,6 +293,7 @@ function Main() {
         })
     }
 
+    // button submit form for user login/account creation
     if (submitButton) {
         submitButton.addEventListener('click', () => {
             const form = document.getElementById('signUpForm');
