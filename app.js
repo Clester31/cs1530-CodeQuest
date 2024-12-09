@@ -196,11 +196,11 @@ class Shop {
     purchaseItem(itemId, user) {
         const item = this.itemsForSale.find(item => item.id == itemId); //search for the item we want based off its id
         if (item && item.inStock) { // if it exists and is in stock then purchase it
-            console.log("Purchased: ", item.name);
+            alert("Purchased: ", item.name);
             user.inventory.push(item); // add to user inventory
             item.inStock = false; // set it as out of stock
         } else {
-            console.log("Item not available for purchase.");
+            alert("Item not available for purchase.");
         }
     }
 }
@@ -241,10 +241,10 @@ const levelMap = new LevelMap(levels, [], levels[0], levels.slice(1));
 // test items
 const shop_items = [
     new Item(1, "Sword", "An iron sword", 10, "Weapon", true),
-    new Item(2, "Shield", "A Sturdy Shield", 15, "Armor", false),
+    new Item(2, "Shield", "A Sturdy Shield", 15, "Armor", true),
     new Item(3, "Potion", "Restores Health", 5, "Consumable", true),
     new Item(4, "Leather Boots", "Makes you run faster", 20, "Armor", true),
-    new Item(5, "Map", "Allows you to unlock any level you choose", 10, "Tool", false)
+    new Item(5, "Map", "Allows you to unlock any level you choose", 10, "Tool", true)
 ];
 
 // test shop
